@@ -15,10 +15,15 @@ if (sessionStorage.getItem("password")) {
   passData = sessionStorage.getItem("password");
 }
 
-const Login = () => {
+const Login = ({ closeModal }) => {
   const [email, setEmail] = useState(mailData || "");
   const [password, setPassword] = useState(passData || "");
   const [response, setResponse] = useState({});
+
+  if (closeModal) {
+    // console.log(closeModal());
+    // setResponse({});
+  }
 
   const handleInput = (e) => {
     const name = e.currentTarget.name;

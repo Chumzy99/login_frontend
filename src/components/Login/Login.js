@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { login, render } from "../../helper";
+import Spinner from "../Spinner/Spinner";
 
 // Styles
 import { Wrapper, Content } from "./Login.styles";
@@ -17,8 +18,10 @@ if (sessionStorage.getItem("password")) {
 
 const Login = () => {
   const [email, setEmail] = useState(mailData || "");
+
   const [password, setPassword] = useState(passData || "");
   const [response, setResponse] = useState({});
+  const [loader, setLoader] = useState(false);
 
   const handleInput = (e) => {
     const name = e.currentTarget.name;
@@ -36,7 +39,9 @@ const Login = () => {
       password,
     };
 
+    setLoader(true);
     setResponse(await login(reqBody));
+    setLoader(false);
   };
 
   let renderMessage = response.status ? true : false;
@@ -68,6 +73,7 @@ const Login = () => {
         <button>Login</button>
         {render(renderMessage, response)}
       </Wrapper>
+      {loader && <Spinner />}
     </div>
   );
 };

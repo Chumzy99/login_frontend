@@ -4,19 +4,21 @@ import { login, render } from "../../helper";
 
 // Styles
 import { Wrapper, Content } from "./Login.styles";
+let mailData = "";
+let passData = "";
+
+if (sessionStorage.getItem("email")) {
+  mailData = sessionStorage.getItem("email");
+}
+
+if (sessionStorage.getItem("password")) {
+  passData = sessionStorage.getItem("password");
+}
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(mailData || "");
+  const [password, setPassword] = useState(passData || "");
   const [response, setResponse] = useState({});
-
-  if (sessionStorage.getItem("email")) {
-    setEmail(sessionStorage.getItem("email"));
-  }
-
-  if (sessionStorage.getItem("password")) {
-    setPassword(sessionStorage.getItem("password"));
-  }
 
   const handleInput = (e) => {
     const name = e.currentTarget.name;

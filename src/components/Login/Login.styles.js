@@ -11,6 +11,7 @@ export const Wrapper = styled.form`
   height: 40rem;
   padding: 3rem;
   border-radius: 1rem;
+  position: relative;
   box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.75);
@@ -25,6 +26,27 @@ export const Wrapper = styled.form`
   button:hover,
   button:active {
     color: #25d366;
+  }
+
+  .modal {
+    background-color: white;
+    padding: 3rem;
+    color: #25d366;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+
+  .check {
+    font-size: 15rem;
+  }
+
+  .failT,
+  .fail {
+    color: red;
   }
 `;
 
@@ -46,4 +68,14 @@ export const Content = styled.div`
   }
 `;
 
-export const Response = styled.div``;
+export const Response = styled.div`
+  /* background-color: blue;
+  position: absolute;
+  top: 20rem;
+  height: 70vh;
+  width: 43vw;
+  .check {
+    font-size: 12rem;
+    color: red;
+  } */
+`;

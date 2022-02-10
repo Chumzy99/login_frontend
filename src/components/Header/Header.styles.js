@@ -39,13 +39,8 @@ export const Content = styled.nav`
   .icons:active {
     stroke: #555;
   }
-  /* .open {
-   
-    opacity: 0;
-  } */
 
   .close {
-    /* display: none; */
     opacity: 0;
   }
 

@@ -1,31 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
+import { login, render } from "../../helper";
 
 // Styles
 import { Wrapper, Content } from "./Login.styles";
 
 const Login = () => {
-  const handleInput = (e) => {};
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [response, setResponse] = useState({});
 
-  const handleSubmit = (e) => {};
+  if (sessionStorage.getItem("email")) {
+    setEmail(sessionStorage.getItem("email"));
+  }
+
+  if (sessionStorage.getItem("password")) {
+    setPassword(sessionStorage.getItem("password"));
+  }
+
+  const handleInput = (e) => {
+    const name = e.currentTarget.name;
+    const value = e.currentTarget.value;
+
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const reqBody = {
+      email,
+      password,
+    };
+
+    setResponse(await login(reqBody));
+  };
+
+  let renderMessage = response.status ? true : false;
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
-      <Content>
-        <label htmlFor="email">Email:</label>
-        <input type="email" value="state" name="email" onChange={handleInput} />
-      </Content>
-      <Content>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          value="state"
-          name="password"
-          onChange={handleInput}
-        />
-      </Content>
-      <button>Login</button>
-    </Wrapper>
+    <div>
+      <Wrapper onSubmit={handleSubmit}>
+        <Content>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            value={email}
+            name="email"
+            placeholder="example@gmail.com"
+            onChange={handleInput}
+            required
+          />
+        </Content>
+        <Content>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            value={password}
+            name="password"
+            onChange={handleInput}
+            required
+          />
+        </Content>
+        <button>Login</button>
+        {render(renderMessage, response)}
+      </Wrapper>
+    </div>
   );
 };
 
